@@ -1,6 +1,5 @@
 import * as express from 'express'
-import * as pg from 'pg'
-import * as dotenv from 'dotenv'
+import {db} from './utils/db'
 
 const appPort = process.env.PORT || 7777
 const appMode = process.env.NODE_ENV || "development"
