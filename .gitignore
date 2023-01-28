@@ -6,6 +6,7 @@ node_modules/
 
 # Runtime JS files
 *.js
+*.js.map
 
 #Editor files
 .vscode/
