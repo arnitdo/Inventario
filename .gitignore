@@ -1,2 +1,8 @@
+# Node modules
 node_modules/
+
+# Environment Secrets
 .env
+
+# Runtime JS files
+*.js
