@@ -1,0 +1,61 @@
+>> Routes <<
+
+// Assume all API routes are prefixed with /api/ \\
+// It's best to keep frontend routing the same (using React-Router), just skip the /api/ part and keep the segments same \\
+// e.g /orgs/:orgId/ -> /orgs/:orgId/ \\
+// Administrator (Create + Modify other users) or Employee (No admin perms) \\
+
+
+ - POST /orgs : Create organization with <:orgId> (Part of onboarding process)
+ - POST | GET /orgs/:orgId/users : 
+ 	- POST: Create user in organization (Part of onboarding process + Dashboard)
+ 	- GET:  Get users in organization (Part of Admin dashboard)
+ 
+ - POST /orgs/:orgId/login : Log in as user (Admin or Employee)
+ 
+ - POST /orgs/:orgId/skus : Create new SKU (Product template with pricing details) with <:skuId>
+ 
+ - PUT | GET /orgs/:orgId/skus/:skuId :
+ 	- PUT : Modify existing SKU data
+ 	- GET : Get existing SKU data
+ 
+ - POST | GET /orgs/:orgId/warehouses : 
+ 	- POST: Create warehouse (returns <:warehouseId>)
+ 	- GET: Get warehouses in organization
+ 	
+ - POST | PUT | GET /orgs/:orgId/warehouses/:warehouseId/items :
+ 	- POST : Insert *NEW* item (WRT skuId) into warehouse
+ 	- PUT : Modify *EXISTING* stock (WRT skuId) of warehouse
+ 	- GET : Get *PAGINATED* stock of warehouse
+ 	
+ - GET /orgs/:orgId/warehouses/:warehouseId/logs : Gets *PAGINATED* log of transactions
+ 
+ - GET /orgs/:orgId/analytics : Get analytical data for user reports (EXACT SPEC TO BE FINALIZED)
+ 
+ - POST /orgs/:orgId/warehouses/transfer : Transfer *EXISTING* stock from SRC-Warehouse to DST-Warehouse
+ 
+ 
+>> Relations <<
+
+1. Each organizational entity is addressed using an organization ID (orgId)
+
+2. Each human entity within an organization is referred to as a "User"
+
+3. Users can be of two authorization levels :
+	- Administrator : Can modify other users as well as stocks
+	- Employee		: Cannot modift other users, but can modify stocks 
+
+4. Each physical warehouse within an organization is addressed using a warehouse ID (warehouseId)
+
+5. Each product within the company is referred using a Stock Keeping Unit (SKU: skuId)
+
+6. SKUs are required to be unique within an organization. A SKU is a product template, not a physical entity
+
+7. Each item (physical, non addressable entity) must belong to a warehouse
+
+8. Stocks inside a warehouse can be addressed by their corresponding SKU ID, each stock is assumed to be the same as others in the SKU family
+	- e.g, If there are three boxes of SKU HCK-BOX-1, you cannot select which box to remove from the stock
+	- Each box is assumed to be the same as the other two
+	- Any box from the corresponding SKU lot is assumed to be removed
+	
+9. Stock transfers (W2W) can only be performed within organizations. 
