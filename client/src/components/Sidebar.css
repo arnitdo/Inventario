@@ -1,0 +1,42 @@
+.side-items{
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    gap: 2rem;
+    font-size: 25px;
+    padding-left: 10px;
+  }
+  .container{
+    display: flex;
+    flex-direction: row;
+    font-family: "Plus Jakarta Sans", sans-serif;
+  }
+  
+  *{
+    padding: 0;
+    margin: 0;
+  }
+  
+  
+  .sidebar{
+    background-color:#1c2536;
+    color:white;
+    height: 100vh;
+    
+  }
+  
+  .active{
+    color:white;
+    text-decoration: none;
+    display: flex;
+    gap:1vh;
+  }
+  
+  .icon-style{
+    padding-top: 10px;
+  }
+  
+  .logo-text{
+    display: flex;
+    justify-content: space-evenly;
+  }
