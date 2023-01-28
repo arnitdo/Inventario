@@ -6,3 +6,7 @@ node_modules/
 
 # Runtime JS files
 *.js
+
+#Editor files
+.vscode/
+.idea/
