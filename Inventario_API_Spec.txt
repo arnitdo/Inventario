@@ -13,7 +13,7 @@
  
  - POST /orgs/:orgId/login : Log in as user (Admin or Employee)
  
- - POST /orgs/:orgId/skus : Create new SKU (Product template with pricing details) with <:skuId>
+ - POST | GET /orgs/:orgId/skus : Create new SKU (Product template with pricing details) with <:skuId>
  
  - PUT | GET /orgs/:orgId/skus/:skuId :
  	- PUT : Modify existing SKU data

@@ -5,6 +5,6 @@ dotenv.config()
 
 const db = new pg.Pool({
 	connectionString: process.env.DATABASE_URL
-})
+});
 
 export {db}
