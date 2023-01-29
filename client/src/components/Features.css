@@ -5,7 +5,21 @@
     , Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     
 }
-
+.btnlogin{
+    font-size: 30px;
+    color: white;
+    height:50px;
+    width:150px;
+    padding-left: 60px;
+    border-radius: 1.9rem;
+    border:1px solid white;
+    background-color: transparent;
+}
+.btnlogin:hover{
+    background-color: white;
+    color: #163c6a;
+    font-size: 30px;
+}
 img{
     width:100%;
     height:100%;
@@ -31,12 +45,6 @@ img{
   
 }
 
-.btn-style{
-    /* width:125px;
-    height:50px;
-    border:1px solid white;
-    border-radius: 1cm; */
-}
 
 .info {
     border-color: #2196F3;
@@ -115,6 +123,22 @@ img{
     width:450px;
   }
 
+  .notifications{
+    background-color: black;
+    color: white;
+    display: flex;
+    padding-top: 50px;
+    margin-bottom: 50px;
+    height: 200px;
+    justify-content: space-evenly;
+  }
+  .left-content{
+    margin-left: 200px;
+    margin-right: 80px;
+  }
+  .right-content{
+    margin-right: 200px;
+  }
 
   .reports{
    
@@ -141,21 +165,25 @@ img{
 
   .step-1{
     display: flex;
+    align-items: center;
     flex-direction: column;
     gap:1rem;
   }
   .step-2{
     display: flex;
+    align-items: center;
     flex-direction: column;
     gap:1.5rem;
   }
   .step-3{
     display: flex;
+    align-items: center;
     flex-direction: column;
     gap:1rem;
   }
   .step-4{
     display: flex;
+    align-items: center;
     flex-direction: column;
     gap:1rem;
   }
@@ -171,3 +199,18 @@ img{
     margin-left: 100px;
     font-weight:bolder;
   }
+  .contact{
+    background-color: black;
+    color: white;
+    display: flex;
+    padding-top: 50px;
+    margin-bottom: 50px;
+    height: 500px;
+  }
+  .left-content-1{
+    margin-left: 100px;
+    width:800px;
+  }
+  
+
+  
