@@ -226,6 +226,126 @@ function DashboardView(props: OpProps){
   )
 }
 
+function WarehouseDashboardView(props: OpProps){
+
+  const [dashboardData, setDashboardData] = useState<any>(null)
+
+
+
+  useEffect(() => {
+    const makeDashReq = async () => {
+      const req = await fetch(
+        `http://localhost:8800/api/orgs/hackoders-corp/warehouses/${props.targetWarehouse!}/analytics`
+      )
+
+      const resJson = await req.json()
+
+      const {status, ...dashData} = resJson
+
+      if (status === "SUCCESS") {
+        setDashboardData(dashData)
+      }
+    }
+
+    makeDashReq()
+  }, [props.targetWarehouse])
+
+  if (dashboardData == null) return dashboardData;
+
+  return (
+    <Grid
+      sx={{
+        display: "grid",
+        gap: "8rem",
+        gridTemplateColumns: "50% 50%",
+        gridTemplateRows: "50% 50%"
+      }}
+    >
+      <Card
+        sx={{
+          borderRadius: "10px",
+          boxShadow: "5px 5px solid grey",
+          padding: "2rem",
+          display: "flex",
+          gap: "1rem",
+          flexDirection: "column"
+        }}
+      >
+        <Typography variant={"h4"}>Most Updated Items</Typography>
+        <Divider />
+        <ul>
+          {dashboardData.mostUpdatedItems.map((item: any) => {
+            return (
+              <li>{item.sku_id} x {item.sku_update_count}</li>
+            )
+          })}
+        </ul>
+      </Card>
+      <Card
+        sx={{
+          borderRadius: "10px",
+          boxShadow: "5px 5px solid grey",
+          padding: "2rem",
+          display: "flex",
+          gap: "1rem",
+          flexDirection: "column"
+        }}
+      >
+        <Typography variant={"h4"}>Least Updated Items</Typography>
+        <Divider />
+        <ul>
+          {dashboardData.leastUpdatedItems.map((item: any) => {
+            return (
+              <li>{item.sku_id} x {item.sku_update_count}</li>
+            )
+          })}
+        </ul>
+      </Card>
+      <Card
+        sx={{
+          borderRadius: "10px",
+          boxShadow: "5px 5px solid grey",
+          padding: "2rem",
+          display: "flex",
+          gap: "1rem",
+          flexDirection: "column"
+        }}
+      >
+        <Typography variant={"h4"}>Out Of Stock</Typography>
+        <Divider />
+        {dashboardData.outOfStockItems.length > 0 ? (
+          <ul>
+            {dashboardData.outOfStockItems.map((item: any) => {
+              return (
+                <li>{item.sku_id}</li>
+              )
+            })}
+          </ul>
+        ) : (
+          <Typography variant={"h6"}>Hooray! All items are in sufficient stock</Typography>
+        )
+        }
+      </Card>
+      <Card
+        sx={{
+          borderRadius: "10px",
+          boxShadow: "5px 5px solid grey",
+          padding: "2rem",
+          display: "flex",
+          gap: "1rem",
+          flexDirection: "column"
+        }}
+      >
+        <Typography variant={"h4"}>Inventory Valuation</Typography>
+        <Divider />
+        <Typography variant={"h2"}>
+          $ {dashboardData.warehouseValue}
+        </Typography>
+      </Card>
+    </Grid>
+  )
+}
+
 
 function Sidebar(props: SidebarProps) {
     const [useropen, setUserOpen] = React.useState(true);
@@ -349,7 +469,9 @@ function Sidebar(props: SidebarProps) {
         <DrawerHeader />
         {operationMode === "DASHBOARD" ?
           <DashboardView />
-          : null
+          : operationMode === "WAREHOUSE" ?
+            <WarehouseDashboardView targetWarehouse={targetWarehouse} />
+            : null
         }
       </Box>
     </Box>
