@@ -42,5 +42,6 @@ function App() {
 }
 
 export {
-  App
+  App,
+  AuthContext
 }

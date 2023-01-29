@@ -56,6 +56,7 @@ function Login(props: LoginPageProps){
           authenticatedRole: userRole,
           authenticatedOrg: orgId
         })
+        redirect("/dashboard")
       }
     } catch (err){
       console.error(err)

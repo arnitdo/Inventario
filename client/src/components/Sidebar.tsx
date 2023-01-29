@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -16,15 +16,16 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import {AiOutlineUser} from 'react-icons/ai'
 import {RxDashboard} from 'react-icons/rx'
-import {AiOutlineMail} from 'react-icons/ai';
+import {FaWarehouse} from 'react-icons/fa';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
 import StarBorder from '@mui/icons-material/StarBorder';
-const drawerWidth = 240;
+import {Grid} from "@mui/material";
+import Card from "@mui/material/Card";
+const drawerWidth = 360;
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -95,7 +96,138 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-function Sidebar() {
+export type SidebarProps = {
+  warehouses: string[]
+}
+
+export type OpMode = "DASHBOARD" | "WAREHOUSE" | "USERS"
+
+export type OpProps = {
+  targetWarehouse?: string
+}
+
+function DashboardView(props: OpProps){
+
+  const [dashboardData, setDashboardData] = useState<any>(null)
+
+
+
+  useEffect(() => {
+    const makeDashReq = async () => {
+      const req = await fetch(
+        `http://localhost:8800/api/orgs/hackoders-corp/analytics`
+      )
+
+      const resJson = await req.json()
+
+      const {status, ...dashData} = resJson
+
+      if (status === "SUCCESS") {
+        setDashboardData(dashData)
+      }
+    }
+
+    makeDashReq()
+  }, [])
+
+  if (dashboardData == null) return dashboardData;
+
+  return (
+    <Grid
+      sx={{
+        display: "grid",
+        gap: "8rem",
+        gridTemplateColumns: "50% 50%",
+        gridTemplateRows: "50% 50%"
+      }}
+    >
+      <Card
+        sx={{
+          borderRadius: "10px",
+          boxShadow: "5px 5px solid grey",
+          padding: "2rem",
+          display: "flex",
+          gap: "1rem",
+          flexDirection: "column"
+      }}
+      >
+        <Typography variant={"h4"}>Most Updated Items</Typography>
+        <Divider />
+          <ul>
+          {dashboardData.mostUpdatedItems.map((item: any) => {
+            return (
+              <li>{item.sku_id} x {item.sku_update_count}</li>
+            )
+          })}
+        </ul>
+      </Card>
+      <Card
+        sx={{
+          borderRadius: "10px",
+          boxShadow: "5px 5px solid grey",
+          padding: "2rem",
+          display: "flex",
+          gap: "1rem",
+          flexDirection: "column"
+      }}
+      >
+        <Typography variant={"h4"}>Least Updated Items</Typography>
+        <Divider />
+        <ul>
+          {dashboardData.leastUpdatedItems.map((item: any) => {
+            return (
+              <li>{item.sku_id} x {item.sku_update_count}</li>
+            )
+          })}
+        </ul>
+      </Card>
+      <Card
+        sx={{
+          borderRadius: "10px",
+          boxShadow: "5px 5px solid grey",
+          padding: "2rem",
+          display: "flex",
+          gap: "1rem",
+          flexDirection: "column"
+      }}
+      >
+        <Typography variant={"h4"}>Out Of Stock</Typography>
+        <Divider />
+        {dashboardData.outOfStockItems.length > 0 ? (
+          <ul>
+            {dashboardData.outOfStockItems.map((item: any) => {
+              return (
+                <li>{item.sku_id}</li>
+              )
+            })}
+          </ul>
+          ) : (
+           <Typography variant={"h2"}>Hooray! All items are in sufficient stock</Typography>
+          )
+        }
+      </Card>
+      <Card
+        sx={{
+          borderRadius: "10px",
+          boxShadow: "5px 5px solid grey",
+          padding: "2rem",
+          display: "flex",
+          gap: "1rem",
+          flexDirection: "column"
+      }}
+      >
+        <Typography variant={"h4"}>Inventory Valuation</Typography>
+        <Divider />
+        <Typography variant={"h2"}>
+          $ {dashboardData.warehouseValue}
+        </Typography>
+      </Card>
+    </Grid>
+  )
+}
+
+
+function Sidebar(props: SidebarProps) {
     const [useropen, setUserOpen] = React.useState(true);
   const [show,setShow] =React.useState(true);
   const toggle=()=>{
@@ -117,8 +249,12 @@ function Sidebar() {
     setShow(true);
   };
 
+  const [operationMode, setOperationMode] = useState<OpMode>("DASHBOARD")
+
+  const [targetWarehouse, setTargetWarehouse] = useState<string>("")
+
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', maxWidth: "75vw", maxHeight: "100vh"}}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
@@ -135,7 +271,7 @@ function Sidebar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
+            hackoders-corp Dashboard
           </Typography>
         </Toolbar>
       </AppBar>
@@ -150,7 +286,9 @@ function Sidebar() {
         <List>
        
        <ListItem disablePadding>
-         <ListItemButton>
+         <ListItemButton
+          onClick={() => setOperationMode("DASHBOARD")}
+         >
            <ListItemIcon>
            <RxDashboard/>
            </ListItemIcon>
@@ -164,19 +302,23 @@ function Sidebar() {
         <List>
       <ListItemButton onClick={toggle}>
         <ListItemIcon>
-          <AiOutlineMail/>
+          <FaWarehouse />
         </ListItemIcon>
-        <ListItemText primary="Warehouse" />
+        <ListItemText primary="Warehouses" />
         {show ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open && show} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Starred" />
-          </ListItemButton>
+          {props.warehouses.map((warehouse) => {
+            return (
+              <ListItemButton sx={{ pl: 4 }} onClick={() => {setOperationMode("WAREHOUSE"); setTargetWarehouse(warehouse)}}>
+                <ListItemIcon>
+                  <FaWarehouse />
+                </ListItemIcon>
+                <ListItemText primary={warehouse} />
+              </ListItemButton>
+            )
+          })}
         </List>
       </Collapse>
 
@@ -185,18 +327,18 @@ function Sidebar() {
       <List>
       <ListItemButton onClick={handleClick}>
         <ListItemIcon>
-          <AiOutlineMail/>
+          <AiOutlineUser/>
         </ListItemIcon>
-        <ListItemText primary="Inbox" />
+        <ListItemText primary="Users" />
         {useropen ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open && useropen} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <ListItemButton sx={{ pl: 4 }}>
             <ListItemIcon>
-              <StarBorder />
+              <AiOutlineUser />
             </ListItemIcon>
-            <ListItemText primary="Starred" />
+            <ListItemText primary="Manage Users" />
           </ListItemButton>
         </List>
       </Collapse>
@@ -205,33 +347,10 @@ function Sidebar() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-          enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-          imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-          Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-          Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-          nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-          leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-          feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-          consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-          sapien faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        {operationMode === "DASHBOARD" ?
+          <DashboardView />
+          : null
+        }
       </Box>
     </Box>
   );

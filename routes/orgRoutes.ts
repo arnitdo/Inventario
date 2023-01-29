@@ -67,7 +67,12 @@ async function loginUser(req: Request, res: Response){
 						userRole: role
 					}
 				})
-			}
+			} else {
+        res.status(400).json({
+          status: "ERR_INVALID_PARAMS",
+          invalidParams: ["userPassword"]
+        })
+      }
 		}
 
 	} catch (err){
