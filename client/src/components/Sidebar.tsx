@@ -379,6 +379,68 @@ function WarehouseDashboardView(props: OpProps){
   )
 }
 
+function UserView(props: OpProps): JSX.Element {
+
+  const [userData, setUserData] = useState<any>(null)
+
+  useEffect(() => {
+    const makeUserReq = async () => {
+      const req = await fetch(
+        "http://localhost:8800/api/orgs/hackoders-corp/users"
+      )
+
+      const reqJson = await req.json()
+
+      const {status} = reqJson
+
+      if (status === "SUCCESS"){
+        const {userData: apiUserData} = reqJson
+        setUserData(apiUserData)
+      }
+    }
+
+    makeUserReq()
+  }, [])
+
+  if (userData == null) return userData
+
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        gap:"1rem",
+        flexDirection:"column"
+      }}
+    >
+      {userData.map((userDat: any) => {
+        const {org_id, user_id, password, role} = userDat
+
+        const redactedPassword = (password as string).slice(0, -3)
+        const nonRedactedPassword = (password as string).slice(-3)
+
+        const joinedRedactedPass = redactedPassword
+          .split("")
+          .map(_ => "*")
+          .reduce((a, b) => a + b)
+
+          + nonRedactedPassword
+
+        return (
+          <Card>
+            <Box
+              sx={{display: "flex", gap: "1rem", justifyContent: "space-evenly"}}
+            >
+              <Typography>{org_id}</Typography>
+              <Typography>{user_id}</Typography>
+              <Typography>{joinedRedactedPass}</Typography>
+              <Typography>{role}</Typography>
+            </Box>
+          </Card>
+        )
+      })}
+    </Box>
+  )
+}
 
 function Sidebar(props: SidebarProps) {
     const [useropen, setUserOpen] = React.useState(true);
@@ -487,7 +549,7 @@ function Sidebar(props: SidebarProps) {
       </ListItemButton>
       <Collapse in={open && useropen} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }}>
+          <ListItemButton sx={{ pl: 4 }} onClick={() => setOperationMode("USERS")}>
             <ListItemIcon>
               <AiOutlineUser />
             </ListItemIcon>
@@ -504,7 +566,7 @@ function Sidebar(props: SidebarProps) {
           <DashboardView />
           : operationMode === "WAREHOUSE" ?
             <WarehouseDashboardView targetWarehouse={targetWarehouse} />
-            : null
+            : <UserView />
         }
       </Box>
     </Box>
