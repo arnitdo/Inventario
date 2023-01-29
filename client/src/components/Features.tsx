@@ -1,14 +1,14 @@
 import React from "react";
 import "./Features.css";
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import BackupTableIcon from '@mui/icons-material/BackupTable';
-import PieChartIcon from '@mui/icons-material/PieChart';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import { Avatar } from '@mui/material';
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import BackupTableIcon from "@mui/icons-material/BackupTable";
+import PieChartIcon from "@mui/icons-material/PieChart";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import { Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 import { TextField, Typography } from "@mui/material";
-import { Button } from '@mui/material';
+import { Button } from "@mui/material";
 const Features = () => {
   const ana = require("../assets/ana.jpg");
   const fimg = require("../assets/fimg.png");
@@ -19,7 +19,13 @@ const Features = () => {
   const ana2 = require("../assets/ana2.jfif");
   const track = require("../assets/track.jfif");
   const a1 = require("../assets/a1.jfif");
-  const avatarStyle = { backgroundColor: "#000", marginTop: '15px', marginLeft: '10px', marginBottom: '10px' }
+  const multiple=require('../assets/multiple.jpg')
+  const avatarStyle = {
+    backgroundColor: "#000",
+    marginTop: "15px",
+    marginLeft: "10px",
+    marginBottom: "10px",
+  };
 
   return (
     <div>
@@ -114,13 +120,24 @@ const Features = () => {
             This type of transfer typically involves several steps, including:
           </Typography>
           <img
-            style={{ width: "500px", height: "500px", marginTop: "10px", objectFit: 'cover', marginLeft: '100px' }}
+            style={{
+              width: "500px",
+              height: "500px",
+              marginTop: "10px",
+              objectFit: "cover",
+              marginLeft: "100px",
+            }}
             src={a1}
           ></img>
         </div>
         <div className="right-portion">
           <img
-            style={{ marginTop: "150px", height: "600px", width: "800px", marginRight: '100px' }}
+            style={{
+              marginTop: "150px",
+              height: "600px",
+              width: "800px",
+              marginRight: "100px",
+            }}
             src={
               "https://img.freepik.com/free-vector/order-worldwide-delivery-service-storehouse-products-storage-transit-warehouse-bonded-warehouse-transferring-process-goods-concept-pinkish-coral-bluevector-isolated-illustration_335657-1808.jpg?w=996&t=st=1674945609~exp=1674946209~hmac=2d0a1bc99158548738305e5aceb6dd0e9a6383763bca34d43de5b1d07e31b69a"
             }
@@ -128,11 +145,18 @@ const Features = () => {
         </div>
       </div>
       <div className="notifications">
-        <div className='left-content'>
-          <Typography variant="h2" >Notifications & Alerts</Typography>
+        <div className="left-content">
+          <Typography variant="h2">Notifications & Alerts</Typography>
         </div>
-        <div className='right-content'>
-          <Typography variant="h6">Allows you to set up notifications and alerts for low stock levels, stockouts, and other inventory-related events. They allow you to stay informed about important events related to your inventory. This feature would typically involve setting up rules or thresholds for certain inventory levels or events, and then sending notifications or alerts when those rules or thresholds are met.</Typography>
+        <div className="right-content">
+          <Typography variant="h6">
+            Allows you to set up notifications and alerts for low stock levels,
+            stockouts, and other inventory-related events. They allow you to
+            stay informed about important events related to your inventory. This
+            feature would typically involve setting up rules or thresholds for
+            certain inventory levels or events, and then sending notifications
+            or alerts when those rules or thresholds are met.
+          </Typography>
         </div>
       </div>
       <div className="reports">
@@ -152,9 +176,10 @@ const Features = () => {
             <img
               style={{
                 height: "60px",
-                width: "60px"
+                width: "60px",
               }}
-              src={one}></img>
+              src={one}
+            ></img>
             <Typography variant="h5">Inventory Turnover Rate Export</Typography>
             <Typography variant="body2">
               It shows how many times a company has sold and replaced inventory
@@ -164,11 +189,13 @@ const Features = () => {
             </Typography>
           </div>
           <div className="step-2">
-            <img style={{
-              height: "60px",
-              width: "60px"
-            }}
-              src={two}></img>
+            <img
+              style={{
+                height: "60px",
+                width: "60px",
+              }}
+              src={two}
+            ></img>
             <Typography variant="h5">Stock Aging Export</Typography>
             <Typography variant="body2">
               Stock aging report shows how long items have been held in
@@ -177,11 +204,13 @@ const Features = () => {
             </Typography>
           </div>
           <div className="step-3">
-            <img style={{
-              height: "60px",
-              width: "60px"
-            }}
-              src={three}></img>
+            <img
+              style={{
+                height: "60px",
+                width: "60px",
+              }}
+              src={three}
+            ></img>
             <Typography variant="h5">Sales by Item report</Typography>
             <Typography variant="body2">
               Sales by item report shows the sales of each item in a certain
@@ -190,11 +219,13 @@ const Features = () => {
             </Typography>
           </div>
           <div className="step-4">
-            <img style={{
-              height: "60px",
-              width: "60px"
-            }}
-              src={four}></img>
+            <img
+              style={{
+                height: "60px",
+                width: "60px",
+              }}
+              src={four}
+            ></img>
             <Typography variant="h5">Current Stock Valuation</Typography>
             <Typography variant="body2">
               Stock valuation is the process of determining the value of a
@@ -204,53 +235,148 @@ const Features = () => {
           </div>
         </div>
 
-        <div style={{ display: 'flex', gap: '3rem', marginLeft: '450px', marginTop: '50px' }}>
-          <Card sx={{ width: '300px', height: '250px', borderRadius: "1cm", backgroundColor: '#dddbdb' }}>
+        <div
+          style={{
+            display: "flex",
+            gap: "3rem",
+            marginLeft: "450px",
+            marginTop: "50px",
+          }}
+        >
+          <Card
+            sx={{
+              width: "300px",
+              height: "250px",
+              borderRadius: "1cm",
+              backgroundColor: "#dddbdb",
+            }}
+          >
             <CardContent>
               <Avatar style={avatarStyle}>
                 <BackupTableIcon />
               </Avatar>
-              <h1 style={{ fontFamily: 'sans-serif', marginLeft: '10px' }}>Tables</h1>
-              <p style={{ fontFamily: 'sans-serif', marginLeft: '10px', marginTop: '10px', fontSize: '0.875rem' }}>A simple and easy-to-read format that displays data in a tabular format with rows and columns</p>
+              <h1 style={{ fontFamily: "sans-serif", marginLeft: "10px" }}>
+                Tables
+              </h1>
+              <p
+                style={{
+                  fontFamily: "sans-serif",
+                  marginLeft: "10px",
+                  marginTop: "10px",
+                  fontSize: "0.875rem",
+                }}
+              >
+                A simple and easy-to-read format that displays data in a tabular
+                format with rows and columns
+              </p>
             </CardContent>
           </Card>
 
-          <Card sx={{ width: '300px', height: '250px', borderRadius: "1cm", backgroundColor: '#dddbdb' }}>
+          <Card
+            sx={{
+              width: "300px",
+              height: "250px",
+              borderRadius: "1cm",
+              backgroundColor: "#dddbdb",
+            }}
+          >
             <CardContent>
               <Avatar style={avatarStyle}>
                 <PieChartIcon />
               </Avatar>
-              <h1 style={{ fontFamily: 'sans-serif', marginLeft: '10px' }}>Charts</h1>
-              <p style={{ fontFamily: 'sans-serif', marginLeft: '10px', marginTop: '10px', fontSize: '0.875rem' }}>A grphical representation of data that can be used used to visualize trends and patterns in the data</p>
+              <h1 style={{ fontFamily: "sans-serif", marginLeft: "10px" }}>
+                Charts
+              </h1>
+              <p
+                style={{
+                  fontFamily: "sans-serif",
+                  marginLeft: "10px",
+                  marginTop: "10px",
+                  fontSize: "0.875rem",
+                }}
+              >
+                A grphical representation of data that can be used used to
+                visualize trends and patterns in the data
+              </p>
             </CardContent>
           </Card>
 
-          <Card sx={{ width: '300px', height: '250px', borderRadius: "1cm", backgroundColor: '#dddbdb' }}>
+          <Card
+            sx={{
+              width: "300px",
+              height: "250px",
+              borderRadius: "1cm",
+              backgroundColor: "#dddbdb",
+            }}
+          >
             <CardContent>
               <Avatar style={avatarStyle}>
                 <BarChartIcon />
               </Avatar>
-              <h1 style={{ fontFamily: 'sans-serif', marginLeft: '10px' }}>Graphs</h1>
-              <p style={{ fontFamily: 'sans-serif', marginLeft: '10px', marginTop: '10px', fontSize: '0.875rem' }}>A virtual representation of data that uses lines, bars, or points, to show the relationship between different data points</p>
+              <h1 style={{ fontFamily: "sans-serif", marginLeft: "10px" }}>
+                Graphs
+              </h1>
+              <p
+                style={{
+                  fontFamily: "sans-serif",
+                  marginLeft: "10px",
+                  marginTop: "10px",
+                  fontSize: "0.875rem",
+                }}
+              >
+                A virtual representation of data that uses lines, bars, or
+                points, to show the relationship between different data points
+              </p>
             </CardContent>
           </Card>
         </div>
-        <div className="contact">
-          <div className='left-content-1'>
-            <Typography variant="h2" >Email us, we would love to hear form you</Typography>
+        <div className="img-container">
+          <div className="image">
+            <img
+              src={multiple}
+              alt="image"
+              style={{
+                marginTop: "50px",
+                marginLeft: "40px",
+                borderRadius: "2cm",
+                width: "500px",
+              }}
+            ></img>
           </div>
-          <div className='right-content-1'>
-            <p><Typography variant="h6">Name</Typography>
-              <input type="text" size={60} style={{ height: '50px' }} />
+          <div className="text">
+            <h1>Multi Location Inventory</h1>
+            <p>
+              Allows users to manage inventory accross multiple locations and
+              transfer stock between them. Multi-location inventory management
+              is the process of managing and tracking invenstory accross
+              multiple warehouse or store locations. It involves maintaining
+              accurate and up-to-date records of inventory levels, movements,
+              and transactions at each locations.
+            </p>
+          </div>
+        </div>
+        <div className="contact">
+          <div className="left-content-1">
+            <Typography variant="h2">
+              Email us, we would love to hear form you
+            </Typography>
+          </div>
+          <div className="right-content-1">
+            <p>
+              <Typography variant="h6">Name</Typography>
+              <input type="text" size={60} style={{ height: "50px" }} />
               <Typography variant="h6">Email</Typography>
-              <input type="text" size={60} style={{ height: '50px' }} /></p>
+              <input type="text" size={60} style={{ height: "50px" }} />
+            </p>
             <Typography variant="h6">Message</Typography>
-            <textarea inputMode="text" style={{ height: '150px', width: '400px' }} />
+            <textarea
+              inputMode="text"
+              style={{ height: "150px", width: "400px" }}
+            />
           </div>
         </div>
       </div>
     </div>
-
   );
 };
 

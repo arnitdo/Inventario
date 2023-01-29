@@ -25,6 +25,18 @@ import Collapse from '@mui/material/Collapse';
 import StarBorder from '@mui/icons-material/StarBorder';
 import {Grid} from "@mui/material";
 import Card from "@mui/material/Card";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Pie } from "react-chartjs-2";
+ChartJS.register(
+    ArcElement,
+    Tooltip,
+    Legend,
+)
 const drawerWidth = 360;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -110,7 +122,19 @@ function DashboardView(props: OpProps){
 
   const [dashboardData, setDashboardData] = useState<any>(null)
 
-
+  const data={
+    labels:['One','Two','Three'],
+    datasets:[
+        {
+            data:[3,6,9],
+            backgroundColor:['yellow','red','green'],
+            borderColor:'black',
+            borderWidth:1,
+        },
+    ]
+}
+const options={
+}
 
   useEffect(() => {
     const makeDashReq = async () => {
@@ -141,6 +165,15 @@ function DashboardView(props: OpProps){
         gridTemplateRows: "50% 50%"
       }}
     >
+         <div>
+        <h1>PieChart</h1>
+        <div style={{
+            padding:'20px',
+            width:'500px'
+        }}>
+            <Pie data={data} options={options}/>
+        </div>
+    </div>
       <Card
         sx={{
           borderRadius: "10px",

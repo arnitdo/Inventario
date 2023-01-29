@@ -212,6 +212,23 @@ img{
     margin-left: 100px;
     width:800px;
   }
+
+  .img-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 2rem;
+}
+
+.image {
+    border-radius: 5cm;
+}
+
+.text {
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    font-size: 25px;
+}
   
 
   
