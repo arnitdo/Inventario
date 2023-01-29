@@ -8,7 +8,7 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import { Avatar } from '@mui/material';
 import { Link } from "react-router-dom";
 import { TextField, Typography } from "@mui/material";
-import {Button} from '@mui/material';
+import { Button } from '@mui/material';
 const Features = () => {
   const ana = require("../assets/ana.jpg");
   const fimg = require("../assets/fimg.png");
@@ -19,7 +19,7 @@ const Features = () => {
   const ana2 = require("../assets/ana2.jfif");
   const track = require("../assets/track.jfif");
   const a1 = require("../assets/a1.jfif");
-  const avatarStyle = {backgroundColor: "#000", marginTop: '15px', marginLeft: '10px', marginBottom: '10px'}
+  const avatarStyle = { backgroundColor: "#000", marginTop: '15px', marginLeft: '10px', marginBottom: '10px' }
 
   return (
     <div>
@@ -203,51 +203,52 @@ const Features = () => {
             </Typography>
           </div>
         </div>
+
+        <div style={{ display: 'flex', gap: '3rem', marginLeft: '450px', marginTop: '50px' }}>
+          <Card sx={{ width: '300px', height: '250px', borderRadius: "1cm", backgroundColor: '#dddbdb' }}>
+            <CardContent>
+              <Avatar style={avatarStyle}>
+                <BackupTableIcon />
+              </Avatar>
+              <h1 style={{ fontFamily: 'sans-serif', marginLeft: '10px' }}>Tables</h1>
+              <p style={{ fontFamily: 'sans-serif', marginLeft: '10px', marginTop: '10px', fontSize: '0.875rem' }}>A simple and easy-to-read format that displays data in a tabular format with rows and columns</p>
+            </CardContent>
+          </Card>
+
+          <Card sx={{ width: '300px', height: '250px', borderRadius: "1cm", backgroundColor: '#dddbdb' }}>
+            <CardContent>
+              <Avatar style={avatarStyle}>
+                <PieChartIcon />
+              </Avatar>
+              <h1 style={{ fontFamily: 'sans-serif', marginLeft: '10px' }}>Charts</h1>
+              <p style={{ fontFamily: 'sans-serif', marginLeft: '10px', marginTop: '10px', fontSize: '0.875rem' }}>A grphical representation of data that can be used used to visualize trends and patterns in the data</p>
+            </CardContent>
+          </Card>
+
+          <Card sx={{ width: '300px', height: '250px', borderRadius: "1cm", backgroundColor: '#dddbdb' }}>
+            <CardContent>
+              <Avatar style={avatarStyle}>
+                <BarChartIcon />
+              </Avatar>
+              <h1 style={{ fontFamily: 'sans-serif', marginLeft: '10px' }}>Graphs</h1>
+              <p style={{ fontFamily: 'sans-serif', marginLeft: '10px', marginTop: '10px', fontSize: '0.875rem' }}>A virtual representation of data that uses lines, bars, or points, to show the relationship between different data points</p>
+            </CardContent>
+          </Card>
+        </div>
         <div className="contact">
           <div className='left-content-1'>
             <Typography variant="h2" >Email us, we would love to hear form you</Typography>
           </div>
-          <div className='right-content-1'>      
+          <div className='right-content-1'>
             <p><Typography variant="h6">Name</Typography>
-            <input type="text" size={60} style={{height:'50px'}}/>
-            <Typography variant="h6">Email</Typography>
-            <input type="text" size={60} style={{height:'50px'}}/></p>
+              <input type="text" size={60} style={{ height: '50px' }} />
+              <Typography variant="h6">Email</Typography>
+              <input type="text" size={60} style={{ height: '50px' }} /></p>
             <Typography variant="h6">Message</Typography>
-            <textarea inputMode="text" style={{height:'150px',width:'400px'}}/>
+            <textarea inputMode="text" style={{ height: '150px', width: '400px' }} />
           </div>
         </div>
-        <div style={{display: 'flex', gap: '3rem', marginLeft: '250px', marginTop: '50px'}}>
-        <Card sx={{ width: '300px', height: '250px', borderRadius: "1cm", backgroundColor: '#dddbdb'}}>
-            <CardContent>
-                <Avatar style={avatarStyle}>
-                    <BackupTableIcon />
-                </Avatar>
-                <h1 style={{ fontFamily: 'sans-serif', marginLeft: '10px' }}>Tables</h1>
-                <p style={{ fontFamily: 'sans-serif', marginLeft: '10px', marginTop: '10px', fontSize: '0.875rem' }}>A simple and easy-to-read format that displays data in a tabular format with rows and columns</p>
-            </CardContent>
-        </Card>
-
-        <Card sx={{ width: '300px', height: '250px', borderRadius: "1cm", backgroundColor: '#dddbdb'}}>
-            <CardContent>
-                <Avatar style={avatarStyle}>
-                    <PieChartIcon />
-                </Avatar>
-                <h1 style={{ fontFamily: 'sans-serif', marginLeft: '10px' }}>Charts</h1>
-                <p style={{ fontFamily: 'sans-serif', marginLeft: '10px', marginTop: '10px', fontSize: '0.875rem' }}>A grphical representation of data that can be used used to visualize trends and patterns in the data</p>
-            </CardContent>
-        </Card>
-
-        <Card sx={{ width: '300px', height: '250px', borderRadius: "1cm", backgroundColor: '#dddbdb'}}>
-            <CardContent>
-                <Avatar style={avatarStyle}>
-                    <BarChartIcon />
-                </Avatar>
-                <h1 style={{ fontFamily: 'sans-serif', marginLeft: '10px' }}>Graphs</h1>
-                <p style={{ fontFamily: 'sans-serif', marginLeft: '10px', marginTop: '10px', fontSize: '0.875rem' }}>A virtual representation of data that uses lines, bars, or points, to show the relationship between different data points</p>
-            </CardContent>
-        </Card>
       </div>
-    </div>
     </div>
 
   );
