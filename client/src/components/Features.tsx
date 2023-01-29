@@ -9,6 +9,7 @@ import { Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 import { TextField, Typography } from "@mui/material";
 import { Button } from "@mui/material";
+import { fontWeight } from "@mui/system";
 const Features = () => {
   const ana = require("../assets/ana.jpg");
   const fimg = require("../assets/fimg.png");
@@ -19,6 +20,7 @@ const Features = () => {
   const ana2 = require("../assets/ana2.jfif");
   const track = require("../assets/track.jfif");
   const a1 = require("../assets/a1.jfif");
+  const a2 = require("../assets/a2.jpg");
   const multiple=require('../assets/multiple.jpg')
   const avatarStyle = {
     backgroundColor: "#000",
@@ -62,6 +64,7 @@ const Features = () => {
           </div>
         </div>
       </div>
+    
       <div className="analytics">
         <div className="left-portion">
           <Typography variant="h2" sx={{ fontWeight: "bolder" }}>
@@ -86,6 +89,7 @@ const Features = () => {
           <img src={ana2} className="ware2" />
         </div>
       </div>
+
       <div className="inventory">
         <div className="left-portion-1">
           <img src={track} className="ware3" />
@@ -121,11 +125,10 @@ const Features = () => {
           </Typography>
           <img
             style={{
-              width: "500px",
-              height: "500px",
+              width: "450px",
+              height: "450px",
               marginTop: "10px",
               objectFit: "cover",
-              marginLeft: "100px",
             }}
             src={a1}
           ></img>
@@ -138,15 +141,39 @@ const Features = () => {
               width: "800px",
               marginRight: "100px",
             }}
-            src={
-              "https://img.freepik.com/free-vector/order-worldwide-delivery-service-storehouse-products-storage-transit-warehouse-bonded-warehouse-transferring-process-goods-concept-pinkish-coral-bluevector-isolated-illustration_335657-1808.jpg?w=996&t=st=1674945609~exp=1674946209~hmac=2d0a1bc99158548738305e5aceb6dd0e9a6383763bca34d43de5b1d07e31b69a"
-            }
+            src={a2}
           ></img>
         </div>
       </div>
+      <div className="img-container">
+          <div className="image">
+            <img
+              src={multiple}
+              alt="image"
+              style={{
+                marginTop: "50px",
+                marginLeft: "40px",
+                borderRadius: "2cm",
+                width: "400px",
+                height: "500px"
+              }}
+            ></img>
+          </div>
+          <div className="text">
+             <Typography variant="h2" sx={{fontWeight: "bolder", marginLeft: "20px"}}>Multi Location Inventory</Typography> 
+            <p style={{marginRight: "250px", marginLeft: "20px", fontWeight: "normal"}}>
+              Allows users to manage inventory accross multiple locations and
+              transfer stock between them. Multi-location inventory management
+              is the process of managing and tracking invenstory accross
+              multiple warehouse or store locations. It involves maintaining
+              accurate and up-to-date records of inventory levels, movements,
+              and transactions at each locations.
+            </p>
+          </div>
+        </div>
       <div className="notifications">
         <div className="left-content">
-          <Typography variant="h2">Notifications & Alerts</Typography>
+          <Typography variant="h2" sx={{ fontWeight: "bolder" }}>Notifications & Alerts</Typography>
         </div>
         <div className="right-content">
           <Typography variant="h6">
@@ -330,34 +357,10 @@ const Features = () => {
             </CardContent>
           </Card>
         </div>
-        <div className="img-container">
-          <div className="image">
-            <img
-              src={multiple}
-              alt="image"
-              style={{
-                marginTop: "50px",
-                marginLeft: "40px",
-                borderRadius: "2cm",
-                width: "500px",
-              }}
-            ></img>
-          </div>
-          <div className="text">
-            <h1>Multi Location Inventory</h1>
-            <p>
-              Allows users to manage inventory accross multiple locations and
-              transfer stock between them. Multi-location inventory management
-              is the process of managing and tracking invenstory accross
-              multiple warehouse or store locations. It involves maintaining
-              accurate and up-to-date records of inventory levels, movements,
-              and transactions at each locations.
-            </p>
-          </div>
-        </div>
+     
         <div className="contact">
           <div className="left-content-1">
-            <Typography variant="h2">
+            <Typography variant="h2" sx={{fontWeight:"bold"}}>
               Email us, we would love to hear form you
             </Typography>
           </div>
